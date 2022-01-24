@@ -21,6 +21,11 @@ class JobCaller {
         //$dbObj->resetAll();  //for testing
         $available_jobs = $dbObj->getAvailableJobCount(); //get available job count
         
+        if($available_jobs == 0){
+            echo "New Jobs not found";
+            return;
+        }
+        
         //Create worker pool and  assign task to workers
         for ($i = 1; $i <= $available_jobs; $i++) {
             $pool->submit(new FetchUrl($urlCaller));
