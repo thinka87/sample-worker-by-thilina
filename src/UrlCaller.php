@@ -39,7 +39,8 @@ class UrlCaller {
      * @return int|Eexception
      */
     public static function getUrl($url) {
-
+        
+        $httpCode=0;
         try {
             $ch = curl_init();
             $options = array(
@@ -58,9 +59,12 @@ class UrlCaller {
             curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
-            return $httpCode;
+            
         } catch (Exception $e) {
             echo "Error ocurred :" . $e->getMessage();
+            
+        } finally {
+            return $httpCode;
         }
     }
 
