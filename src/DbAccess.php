@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DbAccess Class
  *
@@ -10,8 +11,8 @@ class DbAccess {
     const DB_NAME = 'speqta_workers'; //database name
     const DB_USER = 'root'; //database username
     const DB_PASSWORD = ''; //databse password
-    const DB_PORT =3307;  // mysql =3306 , maria db =3307
-    
+    const DB_PORT = 3307;  // mysql =3306 , maria db =3307
+
     /**
      * To store new PDO instance
      * @type object
@@ -38,7 +39,7 @@ class DbAccess {
             die($e->getMessage());
         }
     }
-    
+
     /**
      * Get a PDO instance if not exist
      * @access public
@@ -51,18 +52,17 @@ class DbAccess {
         }
         return self::$instance;
     }
-    
+
     /**
      * Get new URL job by worker
      * @access public
      * Returns the selected database row ,Upon failure returns false.
      * @return array|bool
      */
-
     public function getURLJob() {
 
         try {
-            
+
             //select very firdt job for worker
             $this->pdo->beginTransaction();
 
@@ -71,17 +71,17 @@ class DbAccess {
             $stmt->execute(array(":status" => "NEW"));
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            //return false if not have new jobs
-            if (!$result) {
-                return false;
-            }
+            //if result set
+            if ($result) {
 
-            //change the status of url into "PROCESSING"
-            $sql_update_from = 'UPDATE url_list
+                //change the status of url into "PROCESSING"
+                $sql_update_from = 'UPDATE url_list
 				SET status=:status
 				WHERE id = :id';
-            $stmt = $this->pdo->prepare($sql_update_from);
-            $stmt->execute(array(":status" => "PROCESSING", ":id" => $result["id"]));
+                $stmt = $this->pdo->prepare($sql_update_from);
+                $stmt->execute(array(":status" => "PROCESSING", ":id" => $result["id"]));
+            }
+
             $this->pdo->commit();
 
             return $result;
@@ -90,7 +90,8 @@ class DbAccess {
             die($e->getMessage());
         }
     }
-     /**
+
+    /**
      * Get total job count that need to run by workers
      * @access public
      * Returns the number of rows that need run by workers.
@@ -105,7 +106,7 @@ class DbAccess {
         $stmt->closeCursor();
         return $row_count;
     }
-    
+
     /**
      * Update URL status after URL processed by worker
      * @access public
@@ -130,11 +131,11 @@ class DbAccess {
     }
 
     //close the database connection
-    
+
     public function __destruct() {
         $this->pdo = null;
     }
-    
+
     //Reset the database table for testing purpose
     public function resetAll() {
 
@@ -144,6 +145,5 @@ class DbAccess {
         $stmt->closeCursor();
         return true;
     }
-
 
 }
