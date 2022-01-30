@@ -32,8 +32,8 @@ DROP TABLE IF EXISTS `url_list`;
 CREATE TABLE IF NOT EXISTS `url_list` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `url` text NOT NULL,
-  `status` varchar(15) NOT NULL,
-  `http_code` varchar(5) DEFAULT NULL,
+  `status` varchar(10) NOT NULL,
+  `http_code` smallint(5) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `status` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
@@ -43,11 +43,11 @@ CREATE TABLE IF NOT EXISTS `url_list` (
 --
 
 INSERT INTO `url_list` (`id`, `url`, `status`, `http_code`) VALUES
-(1, 'https://google.com', 'DONE', '200'),
-(2, 'https://www.reddit.com', 'DONE', '200'),
-(3, 'https://www.youtube.com', 'DONE', '200'),
-(4, 'https://twitter.com', 'DONE', '200'),
-(5, 'https://medium.com', 'DONE', '200'),
+(1, 'https://google.com', 'DONE', 200),
+(2, 'https://www.reddit.com', 'DONE', 200),
+(3, 'https://www.youtube.com', 'DONE', 200),
+(4, 'https://twitter.com', 'DONE', 200),
+(5, 'https://medium.com', 'DONE', 200),
 (21, 'https://github.com/', 'NEW', NULL);
 COMMIT;
 
