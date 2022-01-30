@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `url_list` (
   `url` text NOT NULL,
   `status` varchar(15) NOT NULL,
   `http_code` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `status` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
