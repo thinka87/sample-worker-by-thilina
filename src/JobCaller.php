@@ -18,9 +18,8 @@ class JobCaller {
 
         $dbObj = DbAccess::getInstance();   //Get db access instance
         $urlCaller= UrlCaller::getInstance(); //Get UrlCaller instance to pass into FetchUrl class
-        //$dbObj->resetAll();  //for testing
-        $available_jobs = $dbObj->getAvailableJobCount(); //get available job count
         
+        $available_jobs = $dbObj->getAvailableJobCount(); //get available job count
         if($available_jobs == 0){
             echo "New Jobs not found";
             return;
