@@ -6,5 +6,5 @@ ini_set("display_errors", 1);
 spl_autoload_register(function ($class) {
     include ( realpath(dirname(__FILE__)) . '/src/'.$class.'.php' );
 });
-//call to main class to to execute jobs
+//call to main class to execute jobs
 JobCaller::executeJobs(5);
