@@ -1,4 +1,4 @@
-# sample-worker-by-thilina
+# Vanila php workers with pthread
 
 ## Technologies
 ***
